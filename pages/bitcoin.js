@@ -30,14 +30,29 @@ class App extends React.Component {
     return (
       <div className="app">
         <Background width={screenWidth} height={screenHeight}/>
+        <div className="center">
+          <div className="chart">
+
+          </div>
+        </div>
         <style jsx>{`
-          .app {
+          .app, .center {
             display: flex;
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+          }
+          .chart {
+            width: 600px;
+            height: 400px;
+            background-color: #27273f;
+            border-radius: 8px;
+            color: white;
           }
         `}</style>
       </div>
