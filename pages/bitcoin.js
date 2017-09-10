@@ -1,4 +1,5 @@
 import { withScreenSize } from '@vx/responsive'
+import { LinearGradient } from '@vx/gradient'
 
 const Background = ({ width, height }) => {
   return (
@@ -6,7 +7,12 @@ const Background = ({ width, height }) => {
       width={width}
       height={height}
     >
-      <rect width={width} height={height} fill="steelblue"/>
+      <LinearGradient id="fill" vertical={false}>
+        <stop stopColor="#a943e4" offset="0%" />
+        <stop stopColor="#f55989" offset="50%" />
+        <stop stopColor="#ffaf84" offset="100%" />
+      </LinearGradient>
+      <rect width={width} height={height} fill="url(#fill)"/>
     </svg>
   )
 }
