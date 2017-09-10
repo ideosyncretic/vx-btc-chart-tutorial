@@ -24,6 +24,15 @@ class App extends React.Component {
       data: {}
     }
   }
+  componentDidMount () {
+    fetch('https://api.coindesk.com/v1/bpi/historical/close.json')
+    .then(res => res.json())
+    .then(json => {
+      this.setState({
+        data: json
+      })
+    })
+  }
   render () {
     const { screenWidth, screenHeight } = this.props
     const { data } = this.state
@@ -34,6 +43,9 @@ class App extends React.Component {
           <div className="chart">
 
           </div>
+          <p className="disclaimer">
+            {data.disclaimer}
+          </p>
         </div>
         <style jsx>{`
           .app, .center {
@@ -46,6 +58,7 @@ class App extends React.Component {
             justify-content: center;
             align-items: center;
             font-family: Arial;
+            flex-direction: column;
           }
           .chart {
             width: 600px;
@@ -53,6 +66,11 @@ class App extends React.Component {
             background-color: #27273f;
             border-radius: 8px;
             color: white;
+          }
+          .disclaimer {
+            color: white;
+            opacity: 0.4;
+            font-size: 11px;
           }
         `}</style>
       </div>
