@@ -1,5 +1,6 @@
 import { withScreenSize } from '@vx/responsive'
 import { LinearGradient } from '@vx/gradient'
+import Chart from '../components/Chart'
 
 const Background = ({ width, height }) => {
   return (
@@ -41,7 +42,12 @@ class App extends React.Component {
         <Background width={screenWidth} height={screenHeight}/>
         <div className="center">
           <div className="chart">
-
+            <div className="title">
+              Bitcoin Price
+            </div>
+            <div className="chart-container">
+              <Chart data={data} />
+            </div>
           </div>
           <p className="disclaimer">
             {data.disclaimer}
@@ -60,12 +66,21 @@ class App extends React.Component {
             font-family: Arial;
             flex-direction: column;
           }
+          .title {
+            padding: 15px;
+          }
+          .chart-container {
+            flex: 1;
+            display: flex;
+          }
           .chart {
             width: 600px;
             height: 400px;
             background-color: #27273f;
             border-radius: 8px;
             color: white;
+            display: flex;
+            flex-direction: column;
           }
           .disclaimer {
             color: white;
