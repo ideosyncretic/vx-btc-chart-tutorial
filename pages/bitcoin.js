@@ -76,7 +76,7 @@ class App extends React.Component {
               </div>
             </div>
             <div className="chart-container">
-              <Chart data={data} />
+              <Chart data={prices} />
             </div>
           </div>
           <p className="disclaimer">
