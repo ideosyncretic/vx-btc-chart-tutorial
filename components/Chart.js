@@ -1,6 +1,6 @@
 import { withParentSize } from '@vx/responsive'
 
-function Chart({ parentWidth, parentHeight }) {
+function Chart({ data, parentWidth, parentHeight }) {
   const margin = {
     top: 15,
     bottom: 40,

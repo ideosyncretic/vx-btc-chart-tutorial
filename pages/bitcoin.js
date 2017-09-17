@@ -37,13 +37,23 @@ class App extends React.Component {
   render () {
     const { screenWidth, screenHeight } = this.props
     const { data } = this.state
+    console.log(data)
+    if (!data.bpi) return <div>Loading...</div>
+    const prices = Object.keys(data.bpi).map(key => {
+      return {
+        time: key,
+        price: data.bpi[key]
+      }
+    })
+    const currentPrice = prices[prices.length - 1].price
     return (
       <div className="app">
         <Background width={screenWidth} height={screenHeight}/>
         <div className="center">
           <div className="chart">
             <div className="title">
-              Bitcoin Price
+              <div>Bitcoin Price</div>
+              <div>{currentPrice}</div>
             </div>
             <div className="chart-container">
               <Chart data={data} />
