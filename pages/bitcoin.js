@@ -1,6 +1,7 @@
 import { withScreenSize } from '@vx/responsive'
 import { LinearGradient } from '@vx/gradient'
 import Chart from '../components/Chart'
+import formatPrice from '../utils/formatPrice'
 
 const Background = ({ width, height }) => {
   return (
@@ -45,19 +46,33 @@ class App extends React.Component {
         price: data.bpi[key]
       }
     })
+
+    // latest price is last in the array
     const currentPrice = prices[prices.length - 1].price
+    const firstPrice = prices[0].price
+    const diffPrice = currentPrice - firstPrice
+    const hasIncreased = diffPrice > 0
     return (
       <div className="app">
         <Background width={screenWidth} height={screenHeight}/>
-        <div className="center">
-          <div className="chart">
+        <div className="page">
+          <div className="content">
             <div className="titlebar">
               <div className="title">
                 <div>Bitcoin Price</div>
-                <div><small>last 30 days</small></div>
+                <div>
+                  <small>last 30 days</small>
+                </div>
               </div>
-              <div>
-                <div>{currentPrice}</div>
+              <div className="prices">
+                <div>
+                  {formatPrice(currentPrice)}
+                </div>
+                <div className={hasIncreased ? 'increased' : 'decreased'}>
+                  <small>
+                    {hasIncreased ? '▴' : '▾'} {formatPrice(diffPrice)}
+                  </small>
+                </div>
               </div>
             </div>
             <div className="chart-container">
@@ -69,7 +84,7 @@ class App extends React.Component {
           </p>
         </div>
         <style jsx>{`
-          .app, .center {
+          .app, .page {
             display: flex;
             position: absolute;
             top: 0;
@@ -89,11 +104,22 @@ class App extends React.Component {
           }
           .title {
           }
+          .increased {
+            color: #00f1a1;
+          }
+          .decreased {
+            color: #fe5f55;
+          }
+          .prices {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+          }
           .chart-container {
             flex: 1;
             display: flex;
           }
-          .chart {
+          .content {
             width: 600px;
             height: 400px;
             background-color: #27273f;
