@@ -20,14 +20,16 @@ function Chart({ data, parentWidth, parentHeight }) {
   const minDate = Math.min(...data.map(x))
   const maxDate = Math.max(...data.map(x))
 
+  // options for x axis
   const xScale = scaleTime({
     range: [0, width],
     // get the earliest and latest dates from data array
     domain: [minDate, maxDate]
   })
 
+  // options for y axis
   const yScale = scaleLinear({
-    range: [height, 0],
+    range: [height, 0], // because SVG starts from upper left corner, we go from height (top) to 0 (bottom).
     domain: [minPrice, maxPrice]
   })
 
